@@ -8,6 +8,11 @@ In the web interface, OPC video files can be organized in playlists for playback
 # Requirements
 Lots of Neopixel LED stripes (or compatible) connected to [fadecandy] USB adapter(s), a [fadecandy] server installed on a raspberry pi server or any other linux device, and [node.js] to run OPC-LED-Controller.
 
+# Web interface
+
+![webinterface](/flexion-unity/OPC-LED-Controller/blob/master/doc/screenshot_webinterface_01.png?raw=true "Screenshot 1")
+![webinterface](/flexion-unity/OPC-LED-Controller/blob/master/doc/screenshot_webinterface_02.png?raw=true "Screenshot 2")
+
 # Eye candy
 Videos of the OPC-LED-Controller connected to a NeoPixel LED window panel.
 
