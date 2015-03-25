@@ -11,6 +11,6 @@ Lots of Neopixel stripes (or compatible) connected to fadecandy USB adapter(s), 
 
 More documentation will follow. 
 
-[YouTube video of the LED panel controlled by OPC-LED-Controller]:(https://www.youtube.com/watch?v=C-R0qOiEBWI)
+* [Video](https://www.youtube.com/watch?v=C-R0qOiEBWI)
 
 
