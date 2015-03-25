@@ -1,0 +1,15 @@
+{
+    "config": {
+        "thisserverport": 8082,
+        "opcserveraddr": "172.16.1.1",
+        "opcserverport": 7890,
+        "showtimes": {
+            "enabled": false,
+            "starttime": [18,15],
+            "endtime": [22,30],
+            "autoplaylistname": "Default Playlist"
+        }
+    },
+    "animations": [],
+    "playlists": []
+}
