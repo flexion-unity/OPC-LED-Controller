@@ -2,7 +2,7 @@
 LED pixel controller with mobile webinterface for playback of recorded OPC fadecandy files. Runs on [node.js].
 
 # What exactly is OPC-LED-Controller
-This piece of software will allow you to playback previously recorded OPC (Open-Pixel-Control) animations sent to a local or remote fadecandy server. To capture animation data, a modified OPC library will cature live output sent from your [Processing] client to the fadecandy server and save the OPC LED data stream in a local file. This will allow you to capture various LED animations and store the raw data output in a file for later playback by the OPC-LED-Controller.
+This piece of software will allow you to playback previously recorded OPC (Open-Pixel-Control) animations sent to a local or remote fadecandy server. To capture animation data, a modified OPC library will capture live output sent from your [Processing] client to the fadecandy server and save the OPC LED data stream in a local file. This will allow you to capture various LED animations and store the raw data output in a file for later playback by the OPC-LED-Controller.
 In the web interface, OPC video files can be organized in playlists for playback at a specified time.
 
 # Requirements
