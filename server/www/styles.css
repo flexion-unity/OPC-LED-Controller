@@ -1,0 +1,74 @@
+.animLabel { position: absolute; top: 7px; padding-left: 6px; font-size: 10pt; }
+
+.PLFile.active .glyphicon-ok { visibility: visible; }
+.PLFile .glyphicon-ok { visibility: hidden; }
+
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+ .list-group-item { padding: 10px 8px; }
+ .panelShowPlaylists .glyphicon-folder-open,  .panelShowPlaylists .glyphicon-folder-close { padding: 11px 3px;}
+}
+
+
+
+.toggle .handle:before {
+    content: " ";
+    left: -22px;
+    padding: 19px 35px;
+    position: absolute;
+    top: -4px;
+}
+.toggle input { display: none; }
+.item-toggle .toggle {
+    position: absolute;
+    right: 16px;
+    top: 4px;
+    z-index: 3;
+}
+.toggle {
+    display: inline-block;
+    margin: -5px;
+    padding: 5px;
+    pointer-events: auto;
+    position: relative;
+}
+
+.toggle .track {
+    background-color: #e5e5e5;
+    border: 2px solid #e5e5e5;
+    border-radius: 20px;
+    box-sizing: border-box;
+    content: " ";
+    cursor: pointer;
+    display: inline-block;
+    height: 32px;
+    pointer-events: none;
+    transition-duration: 0.2s;
+    transition-property: background-color, border;
+    transition-timing-function: ease-in-out;
+    width: 54px;
+}
+
+.toggle input:checked + .track .handle {
+    background-color: #fff;
+  /*  transform: translate3d(22px, 0px, 0px); doesnt work on iphone; replaced by "left" */
+	left: 28px;
+}
+.toggle .handle {
+    background-color: #fff;
+    border-radius: 28px;
+    display: block;
+    height: 28px;
+    left: 7px;
+    position: absolute;
+    top: 7px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 28px;
+}
+.toggle.toggle-positive input:checked + .track {
+    background-color: #66cc33;
+    border-color: #66cc33;
+}
