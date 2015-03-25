@@ -10,8 +10,8 @@ Lots of Neopixel LED stripes (or compatible) connected to [fadecandy] USB adapte
 
 # Web interface
 
-![webinterface](/flexion-unity/OPC-LED-Controller/blob/master/doc/screenshot_webinterface_01.png?raw=true "Screenshot 1")
-![webinterface](/flexion-unity/OPC-LED-Controller/blob/master/doc/screenshot_webinterface_02.png?raw=true "Screenshot 2")
+![webinterface](/doc/screenshot_webinterface_01.png?raw=true "Screenshot 1")
+![webinterface](/doc/screenshot_webinterface_02.png?raw=true "Screenshot 2")
 
 # Eye candy
 Videos of the OPC-LED-Controller connected to a NeoPixel LED window panel.
