@@ -4,7 +4,7 @@
  * 
  * flexion 2015
  *
- * Version 25.03.2015 17:10
+ * Version 08.11.2015 08:27
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -41,6 +41,7 @@ var OPCPlayer = function(host, port) {
  this.s=[];
  this.playlist;
  this.playlistIndex;
+ this.shuffledplaylistIndex = [];
 
  console.log("* flx OPCPlayerLib initialized for fadecandy server on: " + host);
 
@@ -63,14 +64,26 @@ var OPCPlayer = function(host, port) {
 
  this.playPlaylist = function(objPlaylist) {
   console.log(">* OPCPlayer playing playlist: " + objPlaylist.name);
+
   if (!objPlaylist.items || objPlaylist.items.length<1) {
 	console.log("No items found in specified playlist");
   	return;
   }
+
   this.playlist = objPlaylist;
   this.playlistIndex=0;
+
+  // Random playback order
+  if (objPlaylist.shuffle) {
+   this.shuffledplaylistIndex=[];
+   console.log("Shuffling playlist order (" + objPlaylist.items.length +")");
+   for (var i=0;i<objPlaylist.items.length;i++) this.shuffledplaylistIndex.push(i);
+   this.shuffledplaylistIndex = this.shuffle(this.shuffledplaylistIndex);
+  }
+
   this.loadNextPlaylistFile();
  }
+
 
  this.stopPlayback = function(clearScreen) {
   console.log("* OPCPlayer stopping playback");
@@ -84,6 +97,11 @@ var OPCPlayer = function(host, port) {
   this.playlist = null; // reset playlist
   this.status = "Idle";
   this.nowplaying = "";
+ }
+
+ this.shuffle = function(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
  }
 
   // ------- Internal functions --------------------
@@ -166,23 +184,23 @@ var OPCPlayer = function(host, port) {
 
   }
   this.clearScreen = function() {
-	if (!this.pixelBuffer) return; // we can't clear screen if there's no animation playing
+	if (!this.pixelBuffer) return; // we cannot clear screen when no animation was played
 	if (this.pixelBuffer.length>1) {
 		for (var i=3; i<this.frameLength;i++) 	this.pixelBuffer[i] = 0;
 	     	this._writePixels();
 	}
   }
   this.loadNextPlaylistFile = function() {
-	var anim = this.playlist.items[this.playlistIndex];
+ 	var currentIndex = this.playlist.shuffle?this.shuffledplaylistIndex[this.playlistIndex]:this.playlistIndex;
+	var anim = this.playlist.items[currentIndex];
 	this.repeat = 0;
 	if (anim.repeat && anim.repeat>0) this.repeat = anim.repeat;
-	console.log("-- Playing file [" + this.playlistIndex + "] "+anim.file+" from playlist: " + this.playlist.name );
+	console.log("-- Playing file [" + currentIndex + "] "+anim.file+" from playlist: " + this.playlist.name );
 	this.nowplaying = "Playlist: " + this.playlist.name + " / " + anim.file;
 	this._loadAnimation( anim.file, anim.framerate );
     	this.playlistIndex+=1;
   	if (this.playlistIndex >= this.playlist.items.length) this.playlistIndex=0;
- 
-  }
+   }
 
   this._loadAnimation = function(filename, forceFrameRate) {
    if (this.status=="Playing") {
