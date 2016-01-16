@@ -11,5 +11,22 @@
         }
     },
     "animations": [],
-    "playlists": []
+    "playlists": [
+        {
+            "name": "Default Playlist",
+            "shuffle": true,
+            "items": [
+                {
+                    "file": "snow1.opc",
+                    "title": "Snow animation",
+                    "repeat": 1
+                },
+                {
+                    "file": "snow1star.opc",
+                    "title": "Snow with star",
+                    "repeat": 1
+                }
+	] }
+
+     ]
 }
