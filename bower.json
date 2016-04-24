@@ -1,0 +1,14 @@
+{
+  "name": "flx-OPC-LED-Controller",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "ignore": [
+    "doc/",
+    "recording-client/*"
+  ],
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "fs": "*"
+  }
+}
