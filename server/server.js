@@ -3,7 +3,7 @@
  * 
  * flexion 2015
  *
- * Version 25.03.2015 17:10
+ * Version 25.04.2016 17:12
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -37,12 +37,12 @@
  
 */
 
-var version = "25.03.2015-17:10";
+var version = "25.04.2016-17:12";
 var datastoreFilename="datastore.json";
 var datastore=[];
 
 var opcHost; 		// fcserver host (fadecandy) will be read from datastore.json
-var opcPort = 7890; 	// default fcserver port (fadecandy)
+var opcPort = 7890; // default fcserver port (fadecandy)
 var port = 8082;	// set our port (will be replaced with value read from datastore.json)
 
 var express    = require('express');        // call express
@@ -280,14 +280,14 @@ function isShowTime() {
 
 function readGPIOPowerSupplyStatus() {
  // read GPIO port
- exec('/usr/local/bin/gpio -g read 18', function (error, stdout, stderr) {
+ exec(datastore.config.gpioexec+' -g read 18', function (error, stdout, stderr) {
 	powerSupplyEnabled = (stdout==1); 	  // cmd output is in stdout
  });
 }
 function setPowerSupply(onoff) {
  onoff=(onoff=="1"||onoff==true?"1":"0");
  console.log("Changing Power Supply state to: " + onoff);
- exec('/usr/local/bin/gpio -g write 18 '+onoff, function (error, stdout, stderr) {
+ exec(datastore.config.gpioexec+' -g write 18 '+onoff, function (error, stdout, stderr) {
 	  // output is in stdout
  });
 }
