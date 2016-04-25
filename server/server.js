@@ -186,6 +186,12 @@ router.route('/powersupply')
       powerSupplyEnabled = req.body.state;
       res.json( getDefaultServerInfoResponse(false) );
     });
+//POST	/api/shutdown
+router.route('/shutdown')
+    .post(function(req, res) {
+      shutdown();
+      res.json( getDefaultServerInfoResponse(false) );
+    });
 
 // POST	/api/showtimes	Set show timer
 router.route('/showtimes')
@@ -291,6 +297,12 @@ function setPowerSupply(onoff) {
 	  // output is in stdout
  });
 }
+function shutdown() {
+	 console.log("Shutdown initiated by webclient");
+	 exec(datastore.config.shutdowncmd, function (error, stdout, stderr) {
+		  // output is in stdout
+	 });
+	}
 function searchAnimation(aName) {
  // search file in available animations and return a COPY of the file object
  var rc=null;

@@ -4,6 +4,7 @@
         "opcserveraddr": "172.16.1.1",
         "opcserverport": 7890,
         "gpioexec": "/usr/local/bin/gpio",
+        "shutdowncmd", "sudo /sbin/shutdown -h now"
         "showtimes": {
             "enabled": false,
             "starttime": [18,15],

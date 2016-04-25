@@ -40,6 +40,11 @@ angular.module('app').controller("MainController", function($scope, $http, $inte
    vm.disconnectServer = function() { vm.connected = false; } // stop polling server constantly
    vm.setPowerSupply = function(onoff) { vm.API_POST("/api/powersupply", {"state": onoff }, vm.rcParseServerResponse); }
 
+   vm.shutdown = function() { 
+	   if (!confirm("Do you really want to shutdown the controller?")) return false;
+	   vm.API_POST("/api/shutdown", {}, vm.rcParseServerResponse ) 
+   }
+   
 // --- Playback actions
    vm.playAnimation = function(aName) { vm.API_POST("/api/anim/play", { "file": aName }, vm.rcParseServerResponse )}
    vm.stopPlayback = function(clearScreen) {
