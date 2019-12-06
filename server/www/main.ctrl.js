@@ -5,6 +5,7 @@ angular.module('app').controller("MainController", function($scope, $http, $inte
    vm.title = 'OPC LED Controller';
    vm.srv=[];
    vm.connected = false;
+   vm.editTimer=false;
 
 // --- Generic API POST/GET --------------------
    vm.API_POST = function(apiurl, postData, fnSuccess) {
@@ -71,23 +72,60 @@ angular.module('app').controller("MainController", function($scope, $http, $inte
 	var rcShowTimes = { "enabled": onoff }
 	vm.API_POST("/api/showtimes", { "showtimes": rcShowTimes}, vm.rcParseServerResponse );
    }
-   vm.updateShowTime = function() {
-	var newST = vm.srv.showtimes;
-	if (vm.newStartTimeHours!=null) {
-		if (vm.newStartTimeHours>=0 && vm.newStartTimeMinutes>=0) {
-			newST.starttime = [parseInt(vm.newStartTimeHours), parseInt(vm.newStartTimeMinutes)];
+   vm.toggleEditShowTimes = function() {
+	vm.editTimer = !vm.editTimer;
+	if (vm.editTimer) {
+		var ST = vm.srv.showtimes;
+		if (ST.starttime) {
+			vm.newStartTimeHours = ST.starttime[0];	
+			vm.newStartTimeMinutes = ST.starttime[1];
+		}
+		if (ST.endtime) {
+			vm.newEndTimeHours = ST.endtime[0];	
+			vm.newEndTimeMinutes = ST.endtime[1];
+		}
+		if (ST.starttime2) {
+			vm.newStartTimeHours2 = ST.starttime2[0];	
+			vm.newStartTimeMinutes2 = ST.starttime2[1];
+		}
+		if (ST.endtime2) {
+			vm.newEndTimeHours2 = ST.endtime2[0];	
+			vm.newEndTimeMinutes2 = ST.endtime2[1];
 		}
 	}
-	if (vm.newEndTimeHours!=null) if (vm.newEndTimeHours>=0 && vm.newEndTimeMinutes>=0) newST.endtime = [parseInt(vm.newEndTimeHours), parseInt(vm.newEndTimeMinutes)];
-	// reset UI 
-	vm.newEndTimeHours = null;
-	vm.newEndTimeMinutes = null;
-	vm.newStartTimeHours = null;
-	vm.newStartTimeMinutes = null;
-	vm.editStartTime = false;
-	vm.editEndTime = false;
+   };
+   vm.updateShowTime = function() {
+	var newST = vm.srv.showtimes;
+	var validation=true;
+	if (vm.newStartTimeHours==null) validation=false;
+	if (vm.newStartTimeMinutes==null) validation=false;
+	if (vm.newEndTimeHours==null) validation=false;	
+	if (vm.newEndTimeMinutes==null) validation=false;
+	
+	if (validation==false) {
+		alert("Please fill in all fields of timer 1");
+		return;
+	}
 
+	if (vm.newStartTimeHours2!==null) {
+		if (vm.newStartTimeMinutes2==null) validation=false;
+		if (vm.newEndTimeHours2==null) validation=false;
+		if (vm.newEndTimeMinutes2==null) validation=false;
+	}
+	
+	if (validation==false) {
+		alert("Please fill in all fields of timer 2");
+		return;
+	}
+	newST.starttime = [parseInt(vm.newStartTimeHours), parseInt(vm.newStartTimeMinutes)];
+	newST.endtime = [parseInt(vm.newEndTimeHours), parseInt(vm.newEndTimeMinutes)];
+	if (vm.newStartTimeHours2!==null) {
+		newST.starttime2 = [parseInt(vm.newStartTimeHours2), parseInt(vm.newStartTimeMinutes2)];
+		newST.endtime2 = [parseInt(vm.newEndTimeHours2), parseInt(vm.newEndTimeMinutes2)];
+	}
 	vm.API_POST("/api/showtimes", { "showtimes": newST}, vm.rcParseServerResponse );
+	// leave edit mode
+	vm.editTimer = false;
    }
 
 // --- UI actions ---------------------------------

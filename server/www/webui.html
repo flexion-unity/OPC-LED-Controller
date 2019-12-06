@@ -60,46 +60,48 @@
 		</label>
 	    </li>
 
-<!--	    <li class="list-group-item"><b>Schedule</b>&nbsp; 
-		<span ng-if="main.srv.showtimes.nowactive">Active!</span>
+	<!-- Display ShowTime 1 -->
+	    <li ng-if="main.srv.showtimes.enabled" class="list-group-item" ng-click="main.toggleEditShowTimes()";><b>Timer 1:</b>&nbsp;
+		{{main.srv.showtimes.starttime[0]+":"+(main.srv.showtimes.starttime[1]<10?"0":"")+main.srv.showtimes.starttime[1]}} &nbsp;-&nbsp; 
+		{{main.srv.showtimes.endtime[0]+":"+(main.srv.showtimes.endtime[1]<10?"0":"")+main.srv.showtimes.endtime[1]}}
+		</li>
+	<!-- Display ShowTime 2 -->
+		<li ng-if="main.srv.showtimes.enabled" class="list-group-item" ng-click="main.toggleEditShowTimes()";><b>Timer 2:</b>&nbsp;
+		{{main.srv.showtimes.starttime2[0]+":"+(main.srv.showtimes.starttime2[1]<10?"0":"")+main.srv.showtimes.starttime2[1]}} &nbsp;-&nbsp; 
+		{{main.srv.showtimes.endtime2[0]+":"+(main.srv.showtimes.endtime2[1]<10?"0":"")+main.srv.showtimes.endtime2[1]}}
+		</li>
 
-		<div ng-if="!main.srv.showtimes.enabled" class="badge span1 btn btn-primary" ng-click="main.enableShowTimes(true)"><span class="glyphicon glyphicon-play"></span>&nbsp;Enable</div>
+	<!-- Edit ShowTimes  -->
+	    <li ng-if="main.editTimer" class="list-group-item">
+	     <div class="well" >
+			<b>Enter new start time (1):</b><br/>
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newStartTimeHours" />
+			:
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newStartTimeMinutes" />
+			<br>
+			<b>Enter new end time (1):</b><br/>
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newEndTimeHours" />
+			:
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newEndTimeMinutes" />
+			<br/><br/>
 
-		<div ng-if="main.srv.showtimes.enabled" class="badge span1 btn btn-primary" ng-click="main.enableShowTimes(false)"><span class="glyphicon glyphicon-stop"></span>&nbsp;Disable</div>
+			<b>Enter new start time (2):</b><br/>
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newStartTimeHours2" />
+			:
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newStartTimeMinutes2" />
+			<br>
+			<b>Enter new end time (2):</b><br/>
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newEndTimeHours2" />
+			:
+			<input type="number" maxlength="2" style="width: 56px;" ng-model="main.newEndTimeMinutes2" />
 
-	    </li>
--->
-	<!-- Display ShowTime start -->
-	    <li ng-if="main.srv.showtimes.enabled" class="list-group-item" ng-click="main.editStartTime=!main.editStartTime";><b>Timer start:</b>&nbsp;
-		{{main.srv.showtimes.starttime[0]+":"+(main.srv.showtimes.starttime[1]<10?"0":"")+main.srv.showtimes.starttime[1]}}
-	    </li>
-	<!-- Edit ShowTime start -->
-	    <li ng-if="main.editStartTime" class="list-group-item">
-	     <div class="well" ><b>Enter new start time:</b><br/>
-		<input type="number" maxlength="2" style="width: 36px;" ng-model="main.newStartTimeHours" />
-		:
-		<input type="number" maxlength="2" style="width: 36px;" ng-model="main.newStartTimeMinutes" />
-		<br/><br/> 
-		<div class="span1 btn btn-primary" ng-click="main.updateShowTime()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</div>
-		<div class="span1 btn btn-default" ng-click="main.editStartTime=false"><span class="glyphicon glyphicon-cancel"></span>&nbsp;Cancel</div>
+			<br/><br/>
+			<div class="span1 btn btn-primary" ng-click="main.updateShowTime()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</div>
+			<div class="span1 btn btn-default" ng-click="main.editTimer=false"><span class="glyphicon glyphicon-cancel"></span>&nbsp;Cancel</div>
 	     </div>
 	    </li>
 
-	<!-- Display ShowTime end -->
-	    <li ng-if="main.srv.showtimes.enabled" class="list-group-item" ng-click="main.editEndTime=!main.editEndTime";><b>Timer end:</b>&nbsp;
-	{{main.srv.showtimes.endtime[0]+":"+(main.srv.showtimes.endtime[1]<10?"0":"")+main.srv.showtimes.endtime[1]}}
-	    </li>
-	<!-- Edit ShowTime end -->
-	    <li ng-if="main.editEndTime" class="list-group-item">
-	     <div class="well" ><b>Enter new end time:</b><br/>
-		<input type="number" maxlength="2" style="width: 36px;" ng-model="main.newEndTimeHours" />
-		:
-		<input type="number" maxlength="2" style="width: 36px;" ng-model="main.newEndTimeMinutes" />
-		<br/><br/> 
-		<div class="span1 btn btn-primary" ng-click="main.updateShowTime()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</div>
-		<div class="span1 btn btn-default" ng-click="main.editEndTime=false"><span class="glyphicon glyphicon-cancel"></span>&nbsp;Cancel</div>
-	     </div>
-	    </li>
+	
 	<!-- LED Power supply -->
 	    <li class="list-group-item item-toggle"><b>LED Power Supply is {{main.srv.powersupplyenabled?"ON":"OFF"}}</b>&nbsp; 		
 		<label class="toggle toggle-positive">
@@ -289,7 +291,7 @@
 <br/>
 <a href="http://{{main.datastore.config.opcserveraddr}}:{{main.datastore.config.opcserverport}}">fadecandy web interface</a><br>
 	Server Version {{main.srv.version}}<br/>
-	<b>flexion 2015 </b>
+	<b>&copy; flexion 2015 </b>
   </div><!-- Connected -->
 	
  <!-- -->
