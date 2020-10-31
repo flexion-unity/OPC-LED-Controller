@@ -16,10 +16,11 @@ Lots of Neopixel LED stripes (or compatible) connected to [fadecandy] USB adapte
 # Eye candy
 Videos of the OPC-LED-Controller connected to a NeoPixel LED window panel.
 
-* NeoPixel Panel [Video](https://www.youtube.com/watch?v=yShuQpUOM44)
+* NeoPixel Panels installed [Video](https://www.youtube.com/watch?v=0rKDL-AhrRo)
+* NeoPixel Panels test run [Video](https://www.youtube.com/watch?v=4P_wOI8OdVo)
 * OPC-LED-Controller setup [Video](https://www.youtube.com/watch?v=C-R0qOiEBWI) 
 * Capturing video playback in processing client [Video](https://www.youtube.com/watch?v=MzDn-qfUKUI)
-* UPDATE 2016! Now I have built a second LED panel to extend the screen to both windows! [Video](https://www.youtube.com/watch?v=4P_wOI8OdVo)
+
 
 
 [node.js]:http://nodejs.org
